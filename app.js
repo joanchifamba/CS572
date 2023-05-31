@@ -36,6 +36,12 @@ const serverRooting = function (req, res) {
                     });
                     break;
                 }
+                case "/index.html": {
+                    fs.readFile(path.join(__dirname, "\index.html"), function (err, buffer) {
+                        serveFile(err, buffer, res);
+                    });
+                    break;
+                }
                 case "/page1.html": {
                     fs.readFile(path.join(__dirname, "\page1.html"), function (err, buffer) {
                         serveFile(err, buffer, res);
