@@ -2,11 +2,8 @@ const http = require("http");
 const path = require("path");
 const fs = require("fs");
 
-const serverRunningLog = function () {
-    console.log(constants.SERVER_RUNNING_MESSAGE, server.address().port);
-}
-
 const serveFile = function (error, buffer, res) {
+
     let bufferMessage;
     let statusCode;
 
@@ -18,7 +15,7 @@ const serveFile = function (error, buffer, res) {
         statusCode = 200;
     }
 
-    res.setHeader(constants.RESPONSE_CONTENT_TYPE_LABEL, constants.RESPONSE_CONTENT_TYPE_HTML);
+    res.setHeader("Content-type", "text/html");
     res.writeHeader(statusCode);
     res.end(bufferMessage);
 }
@@ -34,19 +31,19 @@ const serverRooting = function (req, res) {
         case "GET": {
             switch (req.url) {
                 case "/": {
-                    fs.readFile(path.join(__dirname, index.html), function (err, buffer) {
+                    fs.readFile(path.join(__dirname, "\index.html"), function (err, buffer) {
                         serveFile(err, buffer, res);
                     });
                     break;
                 }
-                case "page1.html": {
-                    fs.readFile(path.join(__dirname, page1.html), function (err, buffer) {
+                case "/page1.html": {
+                    fs.readFile(path.join(__dirname, "\page1.html"), function (err, buffer) {
                         serveFile(err, buffer, res);
                     });
                     break;
                 }
-                case "page2.html": {
-                    fs.readFile(path.join(__dirname, page2.html), function (err, buffer) {
+                case "/page2.html": {
+                    fs.readFile(path.join(__dirname, "\page2.html"), function (err, buffer) {
                         serveFile(err, buffer, res);
                     });
                     break;
